@@ -103,7 +103,7 @@ def get_team_name(team_code):
 						f"where team_code = '{team_code}' or team_name like '% {team_code}'"
 			cursor.execute(sql_query)
 			team_info = cursor.fetchone()
-			return team_info[0]
+			return team_info[0] if team_info else None
 	except Exception as e:
 		print(f"Error: {e}")
 		return None
@@ -119,7 +119,7 @@ def read_last_update_time():
 			sql_query = "select * from update_time"
 			cursor.execute(sql_query)
 			upd_time = cursor.fetchone()
-			return upd_time[0] + " (UTC+0)"
+			return upd_time[0] + " (UTC+0)" if upd_time else None
 	except Exception as e:
 		print(f"Error: {e}")
 		return 'Error'
@@ -189,7 +189,7 @@ def handle_message(event):
 				f"=====\nLast Updated @{last_upd_time}"
 				reply_message(event, response_message)
 			else:
-				response_message = f"Team not found. Query: {team_code}"
+				response_message = "Team not found."
 				reply_message(event, response_message)
 		else:
 			response_message = "Wrong format to search for a single team."
@@ -234,7 +234,7 @@ def handle_message(event):
 		response_message = "Please enter keywords separate by comma:\n\n" \
 							"\"player, <a player name>\"\n>> Search for a player info.\n>> e.g. \"player, Stephen Curry\"\n\n" \
 							"\"team, <a team code or name>\"\n>> Search for a team info.\n>> e.g. \"team, GSW\" or \"team, Warriors\"\n\n" \
-							"\"lottery, <team 1 code or name>, <team 2 code or name>\"\n>>"
+							"\"lottery, <team 1 code or name>, <team 2 code or name>\"\n>> Get prediction on the match.\n>> e.g. \"lottery, Rockets, GSW\""
 		reply_message(event, response_message)
 
 

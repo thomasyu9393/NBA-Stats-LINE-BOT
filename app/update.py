@@ -26,7 +26,7 @@ def get_player():
 			modified_players = []
 			for player in players:
 				modified_player = {
-					'name': player.find('td', {'data-stat': 'player'}).text.replace("'", "''"),
+					'name': player.find('td', {'data-stat': 'player'}).text,
 					'position': player.find('td', {'data-stat': 'pos'}).text,
 					'age':     player.find('td', {'data-stat': 'age'}).text,
 					'team_id': player.find('td', {'data-stat': 'team_id'}).text,
@@ -144,6 +144,7 @@ def scrape_and_update():
 			connection = psycopg2.connect(host=DB_HOST, port=DB_PORT, user=DB_USER, password=DB_PASSWORD, database=DB_NAME)
 			cursor = connection.cursor()
 			for player in players:
+				player['name'] = player['name'].replace("'", "''")
 				# player_shooting
 				sql_query = "update player_shooting " \
 							f"set player_fgm = {player['FG']}, player_fga = {player['FGA']}, player_3pm = {player['threeP']}, " \
