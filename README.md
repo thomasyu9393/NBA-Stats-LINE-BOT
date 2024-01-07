@@ -88,4 +88,5 @@ With the training data from the last two seasons (21-22, 22-23) statistics, we t
 
 ## Demo Reply BOT
 It is currently available to test it via QR code link.
+
 ![](qrCode.png)
