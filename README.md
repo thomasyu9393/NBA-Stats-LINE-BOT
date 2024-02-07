@@ -85,8 +85,3 @@ With the training data from the last two seasons (21-22, 22-23) statistics, we t
 - We can handle the player name with special characters, such as `D'Angelo Russell` or `Alperen Şengün`.
 - If a player is traded to another team in season 2023-24, then the stats of that player will be treated as the total stats at all the teams.
 - If you send a sticker to the LINE BOT, then it will reply to you the same sticker. (Only official or default stickers)
-
-## Demo Reply BOT
-It is currently available to test it via QR code link.
-
-![](qrCode.png)
