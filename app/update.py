@@ -74,7 +74,7 @@ def get_team():
 			modified_teams = []
 			for team in teams:
 				modified_team = {
-					'name': team.find('td', {'data-stat': 'team'}).text.replace("'", "''"),
+					'name': team.find('td', {'data-stat': 'team'}).text,
 					'GP':      team.find('td', {'data-stat': 'g'}).text,
 					'FG':      team.find('td', {'data-stat': 'fg'}).text,
 					'FGA':     team.find('td', {'data-stat': 'fga'}).text,
@@ -111,7 +111,7 @@ def get_opp_team():
 			modified_teams = []
 			for team in opp_teams:
 				modified_team = {
-					'name': team.find('td', {'data-stat': 'team'}).text.replace("'", "''"),
+					'name': team.find('td', {'data-stat': 'team'}).text,
 					'FG':      team.find('td', {'data-stat': 'opp_fg'}).text,
 					'FGA':     team.find('td', {'data-stat': 'opp_fga'}).text,
 					'threeP':  team.find('td', {'data-stat': 'opp_fg3'}).text,
@@ -168,6 +168,7 @@ def scrape_and_update():
 
 			teams = get_team()
 			for team in teams:
+				team['name'] = team['name'].replace("'", "''")
 				# team_shooting
 				sql_query = "update team_shooting " \
 							f"set team_fgm = {team['FG']}, team_fga = {team['FGA']}, team_3pm = {team['threeP']}, " \
@@ -191,6 +192,7 @@ def scrape_and_update():
 
 			opp_teams = get_opp_team()
 			for team in opp_teams:
+				team['name'] = team['name'].replace("'", "''")
 				# o_team_shooting
 				sql_query = "update o_team_shooting " \
 							f"set o_team_fgm = {team['FG']}, o_team_fga = {team['FGA']}, o_team_3pm = {team['threeP']}, " \
